@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Alex Rivera – Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d0d0f;--surface:#17171a;--border:#2a2a30;
+  --text:#f0f0f4;--muted:#8888a0;--accent:#7c6ff7;--accent2:#5dcaa5;
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+/* NAV */
+nav{position:fixed;top:0;width:100%;background:rgba(13,13,15,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:0 2rem}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-weight:700;font-size:1.1rem;color:var(--text)}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{color:var(--muted);font-size:.9rem;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+/* SECTIONS */
+section{max-width:1000px;margin:0 auto;padding:5rem 2rem}
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:6rem}
+.hero-badge{display:inline-block;background:rgba(124,111,247,.15);border:1px solid rgba(124,111,247,.3);color:var(--accent);font-size:.8rem;padding:.3rem .8rem;border-radius:999px;margin-bottom:1.5rem}
+.hero-title{font-size:clamp(2rem,6vw,3.8rem);font-weight:800;line-height:1.1;margin-bottom:1rem}
+.hero-title span{color:var(--accent)}
+.hero-sub{font-size:1.15rem;color:var(--muted);max-width:540px;margin-bottom:2rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;padding:.7rem 1.5rem;border-radius:8px;font-weight:600;transition:opacity .2s}
+.btn-primary:hover{opacity:.85;color:#fff}
+.btn-outline{border:1px solid var(--border);color:var(--text);padding:.7rem 1.5rem;border-radius:8px;font-weight:600;transition:background .2s}
+.btn-outline:hover{background:var(--surface)}
+.hero-dots{display:flex;gap:.5rem;margin-top:3rem}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border)}
+.dot.active{background:var(--accent)}
+/* ABOUT */
+#about{border-top:1px solid var(--border)}
+.section-label{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.section-title{font-size:2rem;font-weight:700;margin-bottom:1.5rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.about-text{color:var(--muted);font-size:1rem;line-height:1.8}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.stat-num{font-size:2rem;font-weight:800;color:var(--accent)}
+.stat-label{font-size:.85rem;color:var(--muted);margin-top:.25rem}
+/* SKILLS */
+#skills{border-top:1px solid var(--border)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem}
+.skill-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.skill-cat{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;font-weight:600}
+.skill-list{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);font-size:.8rem;padding:.25rem .6rem;border-radius:6px}
+/* PROJECTS */
+#projects{border-top:1px solid var(--border)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:border-color .2s}
+.proj-card:hover{border-color:var(--accent)}
+.proj-icon{width:40px;height:40px;background:rgba(124,111,247,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem}
+.proj-title{font-weight:700;font-size:1.05rem;margin-bottom:.5rem}
+.proj-desc{color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+/* CONTACT */
+#contact{border-top:1px solid var(--border)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.contact-links{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
+.contact-link{display:flex;align-items:center;gap:.75rem;color:var(--muted);font-size:.95rem;transition:color .2s}
+.contact-link:hover{color:var(--text)}
+.contact-link-icon{width:36px;height:36px;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+/* CHAT */
+#chat-toggle{position:fixed;bottom:1.5rem;right:1.5rem;width:52px;height:52px;background:var(--accent);border-radius:50%;border:none;cursor:pointer;font-size:1.3rem;color:#fff;z-index:200;box-shadow:0 4px 20px rgba(124,111,247,.4);display:flex;align-items:center;justify-content:center;transition:transform .2s}
+#chat-toggle:hover{transform:scale(1.08)}
+#chat-box{position:fixed;bottom:5.5rem;right:1.5rem;width:340px;background:var(--surface);border:1px solid var(--border);border-radius:20px;z-index:200;display:none;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);max-height:520px}
+#chat-box.open{display:flex}
+.chat-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.chat-avatar{width:36px;height:36px;background:rgba(124,111,247,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.chat-header-text .name{font-weight:600;font-size:.95rem}
+.chat-header-text .status{font-size:.75rem;color:var(--accent2)}
+#chat-msgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem;min-height:200px}
+.msg{max-width:85%;padding:.6rem .9rem;border-radius:14px;font-size:.88rem;line-height:1.5}
+.msg.bot{background:rgba(255,255,255,.06);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.user{background:var(--accent);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg.typing{color:var(--muted)}
+.chat-input-row{padding:.75rem 1rem;border-top:1px solid var(--border);display:flex;gap:.5rem}
+#chat-input{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:10px;padding:.5rem .75rem;color:var(--text);font-size:.88rem;outline:none}
+#chat-input:focus{border-color:var(--accent)}
+#chat-send{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.5rem .8rem;cursor:pointer;font-size:.85rem;font-weight:600;transition:opacity .2s}
+#chat-send:hover{opacity:.85}
+footer{text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+@media(max-width:640px){
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .about-stats{grid-template-columns:1fr 1fr}
+  #chat-box{width:calc(100vw - 2rem);right:1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">AR</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div>
+    <div class="hero-badge">✦ Open to new opportunities</div>
+    <h1 class="hero-title">Hi, I'm <span>Alex Rivera</span>.<br>I build things for the web.</h1>
+    <p class="hero-sub">Full-stack developer with 6 years of experience crafting fast, scalable, and beautiful products. Passionate about clean code and great UX.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View my work</a>
+      <a href="#contact" class="btn-outline">Get in touch</a>
+    </div>
+    <div class="hero-dots">
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">About me</div>
+  <h2 class="section-title">Developer by day, problem-solver always</h2>
+  <div class="about-grid">
+    <div>
+      <p class="about-text">I'm Alex Rivera, a full-stack developer based in Lima, Peru. I specialize in building modern web applications using React, Node.js, and cloud infrastructure. I love turning complex problems into simple, elegant solutions.</p>
+      <br>
+      <p class="about-text">When I'm not coding, you'll find me contributing to open source projects, hiking the Andes, or experimenting with new cooking recipes. I believe great software is built by people who care — about the craft, the user, and the team.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"><div class="stat-num">6+</div><div class="stat-label">Years of experience</div></div>
+      <div class="stat-card"><div class="stat-num">40+</div><div class="stat-label">Projects shipped</div></div>
+      <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">Open source repos</div></div>
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Countries worked in</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">Skills</div>
+  <h2 class="section-title">My tech stack</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">Frontend</div>
+      <div class="skill-list">
+        <span class="tag">React</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span><span class="tag">Framer Motion</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Backend</div>
+      <div class="skill-list">
+        <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">GraphQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Cloud & DevOps</div>
+      <div class="skill-list">
+        <span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Vercel</span><span class="tag">GitHub Actions</span><span class="tag">Terraform</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Other</div>
+      <div class="skill-list">
+        <span class="tag">REST APIs</span><span class="tag">Figma</span><span class="tag">Jest</span><span class="tag">Agile/Scrum</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <h2 class="section-title">Things I've built</h2>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-icon">🛒</div>
+      <div class="proj-title">ShopFlow</div>
+      <p class="proj-desc">A headless e-commerce platform handling 50k+ monthly users with real-time inventory management and Stripe integration.</p>
+      <div class="proj-tags"><span class="tag">Next.js</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">Stripe</span></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">📊</div>
+      <div class="proj-title">DataPulse</div>
+      <p class="proj-desc">Analytics dashboard for SaaS teams. Visualizes KPIs in real time, with custom alert rules and CSV/PDF exports.</p>
+      <div class="proj-tags"><span class="tag">React</span><span class="tag">D3.js</span><span class="tag">GraphQL</span><span class="tag">AWS</span></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">🤖</div>
+      <div class="proj-title">ChatBase</div>
+      <p class="proj-desc">Open-source SDK for embedding AI chat assistants into any website. 800+ GitHub stars, used in 60+ projects.</p>
+      <div class="proj-tags"><span class="tag">TypeScript</span><span class="tag">LLM APIs</span><span class="tag">Open Source</span></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">🗺️</div>
+      <div class="proj-title">TrailMate</div>
+      <p class="proj-desc">Mobile-first hiking companion app for the Andes. Offline maps, elevation profiles, and community trail ratings.</p>
+      <div class="proj-tags"><span class="tag">React Native</span><span class="tag">MapBox</span><span class="tag">MongoDB</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <h2 class="section-title">Let's work together</h2>
+  <div class="contact-grid">
+    <div>
+      <p style="color:var(--muted);line-height:1.8">I'm currently open to freelance projects and full-time roles. Whether you have a product idea, need help scaling your team's codebase, or just want to chat about tech — my inbox is open.</p>
+      <div class="contact-links">
+        <a href="mailto:alex@alexrivera.dev" class="contact-link"><span class="contact-link-icon">✉️</span>alex@alexrivera.dev</a>
+        <a href="https://github.com" class="contact-link"><span class="contact-link-icon">🐙</span>github.com/alexrivera</a>
+        <a href="https://linkedin.com" class="contact-link"><span class="contact-link-icon">💼</span>linkedin.com/in/alexrivera</a>
+        <a href="https://twitter.com" class="contact-link"><span class="contact-link-icon">🐦</span>@alexrivera_dev</a>
+      </div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center">
+      <div style="font-size:2rem;margin-bottom:.75rem">💬</div>
+      <p style="font-weight:600;margin-bottom:.5rem">Try the AI assistant</p>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.25rem">Ask anything about Alex — experience, availability, tech stack, and more.</p>
+      <button onclick="openChat()" style="background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.65rem 1.25rem;cursor:pointer;font-weight:600;font-size:.9rem">Chat with AI ✦</button>
+    </div>
+  </div>
+</section>
+
+<footer>Built by Alex Rivera · Lima, Peru · 2026</footer>
+
+<!-- CHAT -->
+<button id="chat-toggle" onclick="toggleChat()" title="Ask Alex's AI">💬</button>
+<div id="chat-box">
+  <div class="chat-header">
+    <div class="chat-avatar">🤖</div>
+    <div class="chat-header-text">
+      <div class="name">Alex's AI Assistant</div>
+      <div class="status">● Online – ask me anything</div>
+    </div>
+  </div>
+  <div id="chat-msgs">
+    <div class="msg bot">Hi! I'm Alex's AI assistant. Ask me anything about his experience, projects, skills, or availability. 👋</div>
+  </div>
+  <div class="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Ask about Alex…" onkeydown="if(event.key==='Enter')sendMsg()"/>
+    <button id="chat-send" onclick="sendMsg()">Send</button>
+  </div>
+</div>
+
+<script>
+const PORTFOLIO_CONTEXT = `
+You are the AI assistant embedded in Alex Rivera's personal portfolio website. Answer questions as if you are a knowledgeable assistant who knows Alex very well. Speak naturally, in first-person-adjacent language (e.g. "Alex has..." or "He specializes in..."). Keep answers concise and friendly (2-4 sentences max). Never make up facts not listed below.
+
+ALEX RIVERA – PORTFOLIO INFO:
+- Full name: Alex Rivera
+- Role: Full-Stack Developer
+- Location: Lima, Peru
+- Experience: 6+ years
+- Projects shipped: 40+
+- Open source repos: 12
+- Countries worked in: 3
+- Open to: Freelance projects and full-time roles
+- Email: alex@alexrivera.dev
+- GitHub: github.com/alexrivera
+- LinkedIn: linkedin.com/in/alexrivera
+- Twitter: @alexrivera_dev
+
+SKILLS:
+- Frontend: React, Next.js, TypeScript, Tailwind CSS, Framer Motion
+- Backend: Node.js, Express, PostgreSQL, MongoDB, GraphQL
+- Cloud/DevOps: AWS, Docker, Vercel, GitHub Actions, Terraform
+- Other: REST APIs, Figma, Jest, Agile/Scrum
+
+PROJECTS:
+1. ShopFlow – Headless e-commerce, 50k+ monthly users, Stripe, Next.js, PostgreSQL
+2. DataPulse – SaaS analytics dashboard, real-time KPIs, D3.js, GraphQL, AWS
+3. ChatBase – Open-source AI chat SDK, 800+ GitHub stars, TypeScript, used in 60+ projects
+4. TrailMate – Mobile hiking app for the Andes, offline maps, React Native, MapBox
+
+PERSONALITY: Passionate about clean code, great UX, open source. Enjoys hiking the Andes and cooking.
+`;
+
+function toggleChat(){
+  const box = document.getElementById('chat-box');
+  box.classList.toggle('open');
+}
+function openChat(){
+  document.getElementById('chat-box').classList.add('open');
+  document.getElementById('chat-input').focus();
+}
+
+async function sendMsg(){
+  const input = document.getElementById('chat-input');
+  const msgs = document.getElementById('chat-msgs');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value = '';
+
+  const userDiv = document.createElement('div');
+  userDiv.className = 'msg user';
+  userDiv.textContent = text;
+  msgs.appendChild(userDiv);
+
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'msg bot typing';
+  typingDiv.textContent = 'Typing…';
+  msgs.appendChild(typingDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  try{
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:300,
+        system: PORTFOLIO_CONTEXT,
+        messages:[{role:'user',content:text}]
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Sorry, I couldn\'t get a response.';
+    typingDiv.classList.remove('typing');
+    typingDiv.textContent = reply;
+  } catch(e){
+    typingDiv.textContent = 'Oops, something went wrong. Try again!';
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+</script>
+</body>
+</html>
